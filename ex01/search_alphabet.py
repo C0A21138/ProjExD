@@ -41,5 +41,4 @@ def response(ans):
     else:
         print("…違います。")
         return 0
-
 main()
