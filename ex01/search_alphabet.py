@@ -30,15 +30,18 @@ def response(ans):
     response_num = int(input("欠損文字数を答えてください。"))
     if response_num == miss_num:
         print("あたりです。では欠損文字を1つずつ答えてください。")
-        for i in range(miss_num):
-            response_alphabet = input(f"{i+1}つ目の文字を答えてください。")
-            if response_alphabet not in ans:
-                print("…違います。最初からやり直してください。")
-                print("-----------------------------------------------")
-                return 0
-            ans.remove(response_alphabet)
-        return 1
+        response_split(ans)
     else:
         print("…違います。")
         return 0
 main()
+
+def response_split(ans):
+    for i in range(miss_num):
+        response_alphabet = input(f"{i+1}つ目の文字を答えてください。")
+        if response_alphabet not in ans:
+            print("…違います。最初からやり直してください。")
+            print("-----------------------------------------------")
+            return 0
+        ans.remove(response_alphabet)
+    return 1
