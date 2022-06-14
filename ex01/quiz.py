@@ -24,12 +24,12 @@ def kaito(num):
         else:
             print("反応がない…違うみたいだ…")
     if num == 2:
-        if ans == q2[1] or q2[2]:
+        if ans == q2[1] or ans == q2[2]:
             print("…正解のようだ")
         else:
             print("反応がない…違うみたいだ…")
     if num == 3:
-        if ans == q3[1] or q3[2] or q3[3] or q3[4]:
+        if ans == q3[1] or ans == q3[2] or ans == q3[3] or ans == q3[4]:
             print("…正解のようだ")
         else:
             print("反応がない…違うみたいだ…")
