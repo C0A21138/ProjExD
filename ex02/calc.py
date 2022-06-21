@@ -4,12 +4,13 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     num = btn["text"]
-    tkm.showinfo("", f"{num}のボタンを押しました")
+    # tkm.showinfo("", f"{num}のボタンを押しました")
+    entry.insert(tk.END, num)
 
 if __name__ == "__main__":
     root = tk.Tk() # tkモジュールにあるTkのインスタンスを作成
     root.title("calculator") # タイトルに"calculator"を表示
-    root.geometry("300x500") # 300x500のウィンドウを作成
+    # root.geometry("300x500") # 300x500のウィンドウを作成
 
     r, c = 0, 0
     for num in range(9, -1, -1):
