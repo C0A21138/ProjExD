@@ -4,8 +4,14 @@ import tkinter.messagebox as tkm
 def button_click(event):
     btn = event.widget
     num = btn["text"]
-    # tkm.showinfo("", f"{num}のボタンを押しました")
-    entry.insert(tk.END, num)
+    if num == "=":
+        eqn = entry.get()
+        res = eval(eqn)
+        entry.delete(0, tk.END)
+        entry.insert()
+    else:
+        # tkm.showinfo("", f"{num}のボタンを押しました")
+        entry.insert(tk.END, num)
 
 if __name__ == "__main__":
     root = tk.Tk() # tkモジュールにあるTkのインスタンスを作成
@@ -16,7 +22,7 @@ if __name__ == "__main__":
     entry.grid(row = 0, column = 0)
 
     r, c = 1, 0 # r：行番号 c：列番号
-    for i, num in enumerate([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, "+"]):
+    for i, num in enumerate([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, "+", "="]):
         btn = tk.Button(root,
                         text = f"{num}",
                         width = 4,
