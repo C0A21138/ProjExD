@@ -12,8 +12,11 @@ if __name__ == "__main__":
     root.title("calculator") # タイトルに"calculator"を表示
     # root.geometry("300x500") # 300x500のウィンドウを作成
 
-    r, c = 0, 0
-    for num in range(9, -1, -1):
+    entry = tk.Entry(width = 10, font = ("Times New Roman", 40))
+    entry.grid(row = 0, column = 0)
+
+    r, c = 1, 0 # r：行番号 c：列番号
+    for i, num in enumerate([9, 8, 7, 6, 5, 4, 3, 2, 1, 0, "+"]):
         btn = tk.Button(root,
                         text = f"{num}",
                         width = 4,
@@ -25,7 +28,7 @@ if __name__ == "__main__":
 
         c += 1
 
-        if (num-1)%3 == 0:
+        if (num-1) % 3 == 0:
             r += 1
             c = 0
 
