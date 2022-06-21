@@ -19,9 +19,8 @@ def button_click(event):
             tkm.showwarning("警告", "いたずら電話はやめましょう。")
         elif eqn == "123-4567-8910":
             tkm.showwarning("警告", f"{eqn}に電話を掛けます")
-            tkm.showwarning("警告", "あなたは呪われました。")
-            tkm.showwarning("警告", "あなたは呪われました。")
-            tkm.showwarning("警告", "あなたは呪われました。")
+            for i in range(5):
+                tkm.showwarning("警告", "あなたは呪われました。")
         else:
             tkm.showwarning("警告", f"{eqn}に電話を掛けます")
             tkm.showerror("Error", "繋がりませんでした。")
