@@ -1,12 +1,12 @@
 import tkinter as tk # tkinterモジュールをtkとして読み込む
-import maze_maker as mm
+import maze_maker as mm # maze_makerモジュールをmmとして読み込む
 
-def key_down(event):
+def key_down(event): # キーが押された時に処理を行う関数を定義
     global key # グローバル宣言
     key = event.keysym # 押されたキーのシンボルkeysymをグローバル変数keyに代入する
 
 
-def key_up(event):
+def key_up(event): # キーが離された時に処理を行う関数を定義
     global key # グローバル宣言
     key = "" # グローバル変数keyに空文字""を代入
 
@@ -34,6 +34,10 @@ if __name__ == "__main__":
     root.title("迷えるこうかとん") # titleを"迷えるこうかとん"に設定
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
     canvas.pack() # canvasを表示
+
+    maze_bg = mm.make_maze(15, 9) # 1：壁 / 0：床を表す二次元リスト
+    mm.show_maze(canvas, maze_bg) # canvasにmaze_bgを描く
+    print(maze_bg)
 
     tori = tk.PhotoImage(file="fig/0.png") # figフォルダにある画像「0.png」を読み込み、インスタンスを生成
     cx, cy = 300, 400 # 横：300、縦：400の座標をそれぞれcx、cyに代入する。
