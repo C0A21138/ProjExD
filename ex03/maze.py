@@ -14,16 +14,16 @@ def key_up(event): # キーが離された時に処理を行う関数を定義
 def main_proc():
     global cx, cy # グローバル宣言
     if key == "Up": # 押されたキーが「Up」のとき
-        cy -= 20 # 上に20移動する
+        cy -= 100 # 上に1マス移動する
         
     elif key == "Down": # 押されたキーが「Down」のとき
-        cy += 20 # 下に20移動する
+        cy += 100 # 下に1マス移動する
 
     elif key == "Left": # 押されたキーが「Left」のとき
-        cx -= 20 # 左に20移動する
+        cx -= 100 # 左に1マス移動する
 
     elif key == "Right": # 押されたキーが「Right」のとき
-        cx += 20 # 右に20移動する
+        cx += 100 # 右に1マス移動する
 
     canvas.coords("tori", cx, cy) # こうかとんの座標を更新する
     root.after(100, main_proc) # 100ミリ秒後に関数main_proc()を呼び出す
@@ -36,14 +36,15 @@ if __name__ == "__main__":
     canvas.pack() # canvasを表示
 
     maze_bg = mm.make_maze(15, 9) # 1：壁 / 0：床を表す二次元リスト
+                                  # 横：15、縦：9
     mm.show_maze(canvas, maze_bg) # canvasにmaze_bgを描く
-    print(maze_bg)
 
     tori = tk.PhotoImage(file="fig/0.png") # figフォルダにある画像「0.png」を読み込み、インスタンスを生成
-    cx, cy = 300, 400 # 横：300、縦：400の座標をそれぞれcx、cyに代入する。
+    mx, my = 1, 1 # 変数mx、myをそれぞれ1で初期化
+    cx, cy = mx*100+50, my*100+50 # 横：300、縦：400の座標をそれぞれcx、cyに代入する。
     canvas.create_image(cx, cy, image=tori, tag="tori")
 
-    key = ""
+    key = "" # 変数keyを空文字""で初期化
     root.bind("<KeyPress>", key_down) # キーが押されたとき、関数key_down()を呼び出す
     root.bind("<KeyRelease>", key_up) # キーが離されたとき、関数key_up()を呼び出す
 
