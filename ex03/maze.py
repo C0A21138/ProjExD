@@ -1,16 +1,35 @@
 import tkinter as tk
 
 def key_down(event):
-    global key_down
+    global key
     key = event.keysym
+
 
 def key_up(event):
     global key
     key = ""
 
+
+def main_proc():
+    global cx, cy
+    if key == "Up": # 押されたキーが「Up」のとき
+        cy -= 20 # 上に20移動する
+        
+    elif key == "Down":
+        cy += 20
+
+    elif key == "Left":
+        cx -= 20
+
+    elif key == "Right":
+        cx += 20
+
+    canvas.coords("tori", cx, cy)
+    root.after(100, main_proc)
+
 if __name__ == "__main__":
     root = tk.Tk() # tkモジュールにあるTkのインスタンスを作成
-    
+
     root.title("迷えるこうかとん") # titleを"迷えるこうかとん"に設定
     canvas = tk.Canvas(root, width=1500, height=900, bg="black")
     canvas.pack()
@@ -21,6 +40,8 @@ if __name__ == "__main__":
 
     key = ""
     root.bind("<KeyPress>", key_down)
-    root.bind("<KeyRelease>", key_down)
+    root.bind("<KeyRelease>", key_up)
 
-    root.mainloop()
+    main_proc() # 関数main_proc()を呼び出す
+
+    root.mainloop() # ウィンドウを表示する
