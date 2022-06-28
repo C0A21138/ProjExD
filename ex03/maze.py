@@ -42,7 +42,7 @@ def main_proc():
     root.after(100, main_proc) # 100ミリ秒後に関数main_proc()を呼び出す
 
     if mx == g_x and my == g_y:
-        mx, my = g_x, g_y
+        mx, my = cx, cy
         tkm.showinfo("脱出成功", "脱出に成功しました！")
         quit()
 
@@ -68,7 +68,7 @@ if __name__ == "__main__":
 
     g_x = randint(1, maze_x)
     g_y = randint(1, maze_y)
-    while maze_bg[g_y][g_x] != 0:
+    while maze_bg[g_y][g_x] != 0 or (g_x == 1 and g_y == 1):
         g_x = randint(1, maze_x-1)
         g_y = randint(1, maze_y-1)
     canvas.create_rectangle(g_x*100, g_y*100, g_x*100+100, g_y*100+100, fill = "yellow")
@@ -83,7 +83,5 @@ if __name__ == "__main__":
     root.bind("<KeyRelease>", key_up) # キーが離されたとき、関数key_up()を呼び出す
 
     main_proc() # 関数main_proc()を呼び出す
-
-    #tkm.showinfo("脱出開始", "50回歩くまでに脱出しよう!")
 
     root.mainloop() # ウィンドウを表示する
