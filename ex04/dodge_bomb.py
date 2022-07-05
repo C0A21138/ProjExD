@@ -41,6 +41,7 @@ def main():
     pg.draw.circle(bmimg_sfc, ( 63, 0, 0), (10, 10),  3)
     pg.draw.circle(bmimg_sfc, (  1, 0, 0), (10, 10),  1)
 
+    # 追加機能として、レーザー機能の実装に失敗したためコメントアウトしています。
     #raimg_rect = raimg_sfc.get_rect() # Rect
 
     bmimg_rect = bmimg_sfc.get_rect() # Rect
@@ -79,6 +80,7 @@ def main():
 
         bmimg_rect.move_ip(vx, vy) # x座標をvx, y座標をvy移動させる
 
+        # 追加機能として、レーザー機能の実装に失敗したためコメントアウトしています。
         #screen_sfc.blit(raimg_sfc, raimg_rect)  # レーザーを表示する
         #raimg_rect.move_ip(+2, +2) # x座標をvx, y座標をvy移動させる
 
@@ -95,6 +97,7 @@ def main():
         if count >= 20:
             return "CLEAR"
 
+        # 追加機能として、レーザー機能の実装に失敗したためコメントアウトしています。
         # if bmimg_rect.colliderect(bmimg_rect): # 爆弾がこうかとんに当たったとき
         #     return
 
