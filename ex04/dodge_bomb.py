@@ -2,8 +2,8 @@ import pygame as pg
 import sys
 
 def main():
-    clock = pg.time.Clock()
-    pg.display.set_caption("逃げろ！こうかとん")
+    clock = pg.time.Clock()                       # 時間計測用のオブジェクト
+    pg.display.set_caption("逃げろ！こうかとん")  # タイトルバーに「逃げろ！こうかとん」を表示する
     screen_sfc = pg.display.set_mode((1600, 900)) # Surface
     screen_rect = screen_sfc.get_rect()           # Rect
     bgimg_sfc = pg.image.load("fig/pg_bg.jpg")    # Surface
@@ -22,11 +22,22 @@ def main():
 
     while True:
         screen_sfc.blit(bgimg_sfc, bgimg_rect)      # 背景
-        screen_sfc.blit(toriimg_sfc, toriimg_rect)  # こうかとん
 
         for event in pg.event.get():  # イベントを繰り返して処理
             if event.type == pg.QUIT: # ウィンドウのXボタンをクリックしたら
                 return
+
+        key_states = pg.key.get_pressed() # 辞書
+        if key_states[pg.K_UP] == True: # y座標を-1
+            toriimg_rect.centery -= 1
+        if key_states[pg.K_DOWN] == True: # y座標を+1
+            toriimg_rect.centery += 1
+        if key_states[pg.K_LEFT] == True: # x座標を-1
+            toriimg_rect.centerx -= 1
+        if key_states[pg.K_RIGHT] == True: # x座標を+1
+            toriimg_rect.centerx += 1
+        screen_sfc.blit(toriimg_sfc, toriimg_rect)  # こうかとん
+
             
         pg.display.update()
         clock.tick(1000)
