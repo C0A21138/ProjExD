@@ -1,5 +1,6 @@
-import pygame as pg
-import sys
+from random import randint     # randomモジュール内にあるrandint関数を読み込む
+import pygame as pg            # pygameモジュールをpgとして読み込む
+import sys                     # sysモジュールを読み込む
 
 def main():
     clock = pg.time.Clock()                       # 時間計測用のオブジェクト
@@ -19,9 +20,17 @@ def main():
     # x座標900, y座標400の位置にこうかとんを表示する
     toriimg_rect.center = 900, 400
 
+    bmimg_sfc = pg.Surface((20, 20)) # Surface
+    bmimg_sfc.set_colorkey((0, 0, 0))
+    pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10) # 爆弾を作成
+    bmimg_rect = bmimg_sfc.get_rect() # Rect
+    bmimg_rect.centerx = randint(0, screen_rect.width)
+    bmimg_rect.centery = randint(0, screen_rect.height)
+    vx, vy = +1, +1
+
 
     while True:
-        screen_sfc.blit(bgimg_sfc, bgimg_rect)      # 背景
+        screen_sfc.blit(bgimg_sfc, bgimg_rect)      # 背景を表示する
 
         for event in pg.event.get():  # イベントを繰り返して処理
             if event.type == pg.QUIT: # ウィンドウのXボタンをクリックしたら
@@ -36,11 +45,14 @@ def main():
             toriimg_rect.centerx -= 1
         if key_states[pg.K_RIGHT] == True: # x座標を+1
             toriimg_rect.centerx += 1
-        screen_sfc.blit(toriimg_sfc, toriimg_rect)  # こうかとん
+        screen_sfc.blit(toriimg_sfc, toriimg_rect)  # こうかとんを表示する
 
-            
-        pg.display.update()
-        clock.tick(1000)
+        bmimg_rect.move_ip(vx, vy) # x座標をvx, y座標をvy移動させる
+
+        screen_sfc.blit(bmimg_sfc, bmimg_rect)  # 爆弾を表示する
+
+        pg.display.update()  # 画面を更新する
+        clock.tick(1000)     # 1000fpsの時を刻む
 
 
 if __name__ == "__main__":
