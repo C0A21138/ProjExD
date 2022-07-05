@@ -72,6 +72,11 @@ def main():
         vx *= yoko
         vy *= tate
 
+        if toriimg_rect.colliderect(bmimg_rect): # こうかとんが爆弾に当たったとき
+            return
+        # if bmimg_rect.colliderect(bmimg_rect): # 爆弾がこうかとんに当たったとき
+        #     return
+
         pg.display.update()  # 画面を更新する
         clock.tick(1000)     # 1000fpsの時を刻む
 
