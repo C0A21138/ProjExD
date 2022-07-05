@@ -21,11 +21,18 @@ def main():
     toriimg_rect.center = 900, 400
 
     bmimg_sfc = pg.Surface((20, 20)) # Surface
-    bmimg_sfc.set_colorkey((0, 0, 0))
-    pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10) # 爆弾を作成
+    bmimg_sfc.set_colorkey((0, 0, 0)) # 爆弾の背景を透明にする
+
+    # 爆弾を作成
+    pg.draw.circle(bmimg_sfc, (255, 0, 0), (10, 10), 10)
+    pg.draw.circle(bmimg_sfc, (191, 0, 0), (10, 10),  7)
+    pg.draw.circle(bmimg_sfc, (127, 0, 0), (10, 10),  5)
+    pg.draw.circle(bmimg_sfc, ( 63, 0, 0), (10, 10),  3)
+    pg.draw.circle(bmimg_sfc, (  1, 0, 0), (10, 10),  1)
+
     bmimg_rect = bmimg_sfc.get_rect() # Rect
-    bmimg_rect.centerx = randint(0, screen_rect.width)
-    bmimg_rect.centery = randint(0, screen_rect.height)
+    bmimg_rect.centerx = randint(0, screen_rect.width)  # 爆弾のx座標をランダムに設定する
+    bmimg_rect.centery = randint(0, screen_rect.height) # 爆弾のy座標をランダムに設定する
     vx, vy = +1, +1
 
 
@@ -37,23 +44,46 @@ def main():
                 return
 
         key_states = pg.key.get_pressed() # 辞書
-        if key_states[pg.K_UP] == True: # y座標を-1
+        if key_states[pg.K_UP] == True:    # y座標を-1
             toriimg_rect.centery -= 1
-        if key_states[pg.K_DOWN] == True: # y座標を+1
+        if key_states[pg.K_DOWN] == True:  # y座標を+1
             toriimg_rect.centery += 1
-        if key_states[pg.K_LEFT] == True: # x座標を-1
+        if key_states[pg.K_LEFT] == True:  # x座標を-1
             toriimg_rect.centerx -= 1
         if key_states[pg.K_RIGHT] == True: # x座標を+1
             toriimg_rect.centerx += 1
+        if check_bound(toriimg_rect, screen_rect) != (1, 1): # 領域外のとき
+            if key_states[pg.K_UP] == True:    # y座標を+1
+                toriimg_rect.centery += 1
+            if key_states[pg.K_DOWN] == True:  # y座標を-1
+                toriimg_rect.centery -= 1
+            if key_states[pg.K_LEFT] == True:  # x座標を+1
+                toriimg_rect.centerx += 1
+            if key_states[pg.K_RIGHT] == True: # x座標を-1
+                toriimg_rect.centerx -= 1
+
         screen_sfc.blit(toriimg_sfc, toriimg_rect)  # こうかとんを表示する
 
         bmimg_rect.move_ip(vx, vy) # x座標をvx, y座標をvy移動させる
 
         screen_sfc.blit(bmimg_sfc, bmimg_rect)  # 爆弾を表示する
 
+        yoko, tate = check_bound(bmimg_rect, screen_rect)
+        vx *= yoko
+        vy *= tate
+
         pg.display.update()  # 画面を更新する
         clock.tick(1000)     # 1000fpsの時を刻む
 
+def check_bound(rect, screen_rect):
+    # [1] rect: こうかとん or 爆弾のRect
+    # [2] scr_rect: スクリーンのRect
+    yoko, tate = +1, +1
+    if rect.left < screen_rect.left or screen_rect.right < rect.right:
+        yoko = -1
+    if rect.top < screen_rect.top or screen_rect.bottom < rect.bottom:
+        tate = -1
+    return yoko, tate
 
 if __name__ == "__main__":
     pg.init()
