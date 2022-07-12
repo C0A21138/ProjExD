@@ -91,7 +91,7 @@ def main():
 
     while True:
         scr.blit()
-        Score = time_count*100 - damage_count*5
+        Score = time_count*100 - damage_count*5     # 経過時間×100-HP減少数*5でスコアが計算される
 
         if Score <= 500 and HP != 0:
             time_count = int(pg.time.get_ticks()/1000)
@@ -180,4 +180,3 @@ if __name__ == "__main__":
     main()
     pg.quit()
     sys.exit()
-    
