@@ -93,7 +93,7 @@ def main():
         scr.blit()
         Score = time_count*100 - damage_count*5
 
-        if Score <= 500:
+        if Score <= 500 and HP != 0:
             time_count = int(pg.time.get_ticks()/1000)
 
         # 練習2
@@ -124,11 +124,10 @@ def main():
             bkd3.update(scr)
             bkd4.update(scr)
             bkd5.update(scr)
-            tori = "fig/6.png"
+            tori = "fig/8.png"
             kkt = Bird(tori, 2.0, (800, 400))
-            success_txt = font.render(("GAME CLEAR"), True, "BLACK")
-            scr.sfc.blit(success_txt, (610, 400))
-            return "LOSER"
+            over_txt = font.render(("GAME OVER"), True, "BLACK")
+            scr.sfc.blit(over_txt, (610, 400))
 
         if Score >= 500:
             bkd1 = Bomb((255, 0, 0), 0, (+2, +2), scr)
@@ -178,8 +177,6 @@ def Damage(surface, scale):
 
 if __name__ == "__main__":
     pg.init()
-    check = main()
-    if check == "LOSER":
-        tkm.showinfo("LOSER", "負けてしまいました…")
+    main()
     pg.quit()
     sys.exit()
